@@ -1,8 +1,8 @@
 {
-  "name": "nft20.js",
+  "name": "nft20",
   "version": "1.0.0",
   "description": "NFT20 SDK for easily trading NFT",
-  "main": "index.js",
+  "main": "nft20.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/verynifty/nft20.js/issues"
   },
-  "homepage": "https://github.com/verynifty/nft20.js#readme"
+  "homepage": "https://github.com/verynifty/nft20.js#readme",
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
 }
