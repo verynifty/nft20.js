@@ -1,0 +1,22 @@
+{
+  "name": "nft20.js",
+  "version": "1.0.0",
+  "description": "NFT20 SDK for easily trading NFT",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/verynifty/nft20.js.git"
+  },
+  "keywords": [
+    "NFT"
+  ],
+  "author": "https://nft20.io/",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/verynifty/nft20.js/issues"
+  },
+  "homepage": "https://github.com/verynifty/nft20.js#readme"
+}
