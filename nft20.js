@@ -10,14 +10,34 @@ function NFT20() {
     };
 }
 
-NFT20.prototype.getPools = async function(network = 420) {
+NFT20.prototype.getPools = async function (network = 420) {
     let url = this.API_PATH + "/pools?perPage=1000"
     if (network != this.NETWORKS.ALL) {
         url += "&network=" + network;
     }
-    let pools = await axios.get(this.API_PATH + "/pools?perPage=1000");
+    let pools = await axios.get(url);
     pools = pools.data.data;
     return (pools);
+}
+
+NFT20.prototype.getPool = async function (nftContractAddress) {
+    if (nftAddress == null) {
+        return null;
+    }
+    let url = this.API_PATH + "/pools?nft=" + nftContractAddress
+    let pool = await axios.get(url);
+    pool = pool.data.data;
+    return pool[0]
+}
+
+NFT20.prototype.getPoolContent = async function (nftContractAddress) {
+    if (nftAddress == null) {
+        return null;
+    }
+    let url = this.API_PATH + "/nfts?perPage=1000&nft=" + nftContractAddress
+    let nfts = await axios.get(url);
+    nfts = pools.data.data;
+    return (nfts);
 }
 
 module.exports = NFT20
