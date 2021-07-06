@@ -11,8 +11,13 @@ function NFT20() {
 }
 
 NFT20.prototype.getPools = async function(network = 420) {
-    let pools = await axios.get("this.API_PATH" + "/pools?perPage=1000");
-    console.log(pool)
+    let url = this.API_PATH + "/pools?perPage=1000"
+    if (network != this.NETWORKS.ALL) {
+        url += "&network=" + network;
+    }
+    let pools = await axios.get(this.API_PATH + "/pools?perPage=1000");
+    pools = pools.data.data;
+    return (pools);
 }
 
 module.exports = NFT20
