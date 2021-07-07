@@ -6,10 +6,14 @@ const ABIS = {
     ERC20: require('./ABIS/ERC20.json'),
     NFT20CAS: require('./ABIS/NFT20CAS.json'),
     ERC721: require('./ABIS/ERC721.json'),
+    UNISWAPV2: require('./ABIS/UniswapRouterV2.json'),
+    UNISWAPV3: require('./ABIS/UniswapQuoterV3.json')
 }
 
 const CONTRACT_INSTANCES = {
-    NFT20CAS: "0xA42f6cADa809Bcf417DeefbdD69C5C5A909249C0"
+    NFT20CAS: "0xA42f6cADa809Bcf417DeefbdD69C5C5A909249C0",
+    UNISWAPV2: "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+    UNISWAPV3: "0xb27308f9F90D607463bb33eA1BeBb41C27CE5AB6"
 }
 
 function NFT20(ethereumProvider) {
@@ -21,6 +25,15 @@ function NFT20(ethereumProvider) {
     };
     this.web3 = new Web3(new Web3.providers.HttpProvider(ethereumProvider));
     this.NFT20CAS = new this.web3.eth.Contract(ABIS.NFT20CAS, CONTRACT_INSTANCES.NFT20CAS);
+    this.UNISWAPV2 = new ethereum.w3.eth.Contract(
+        ABIS.UNISWAPV2,
+        CONTRACT_INSTANCES.UNISWAPV2
+    );
+    this.UNISWAPV3 = new ethereum.w3.eth.Contract(
+        ABIS.UNISWAPV3,
+        CONTRACT_INSTANCES.UNISWAPV3
+    );
+    this.UNISWAPV3 = 
 }
 
 NFT20.prototype.getPools = async function (network = 0) {
