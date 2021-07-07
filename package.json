@@ -1,8 +1,8 @@
 {
   "name": "nft20",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "NFT20 SDK for easily trading NFT",
-  "main": "dist/nft20.js",
+  "main": "build/nft20.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
