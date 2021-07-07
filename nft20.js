@@ -44,7 +44,7 @@ NFT20.prototype.getPool = async function (nftContractAddress) {
 }
 
 NFT20.prototype.getPoolContent = async function (nftContractAddress) {
-    if (nftAddress == null) {
+    if (nftContractAddress == null) {
         return null;
     }
     let url = this.API_PATH + "/nfts?nft=" + nftContractAddress

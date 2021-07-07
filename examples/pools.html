@@ -11,21 +11,30 @@
 <body>
     <h1>NFT20.js Examples</h1>
     <h2>Listing pool</h2>
-    <ul id="pool_list">
+    <select id="pool_list">
 
-    </ul>
-
+    </select>
 </body>
 
 <script>
 
-$(document).ready(async function() {
-    let nft20 = new NFT20("https://mainnet.infura.io/v3/a634422ef8f84eeab6c55d89d1a38e5d");
-    let pools = await nft20.getPools();
-    pools.forEach(pool => {
-        $("#pool_list").append('<li>' + pool.name + '</li>')
+    $(document).ready(async function () {
+        let nft20 = new NFT20("https://mainnet.infura.io/v3/a634422ef8f84eeab6c55d89d1a38e5d");
+
+        $("#pool_list").change(async function (a) {
+            let selectedPool = this.value;
+            let nfts = await nft20.getPoolContent(selectedPool)
+            console.log(nfts)
+        });
+
+        // We first load all pools
+        let pools = await nft20.getPools();
+        pools.forEach(pool => {
+            $("#pool_list").append('<option value="' + pool.nft + '">' + pool.name + '</option>')
+        });
+
+
     });
-});
 </script>
 
 </html>
