@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <script src="https://unpkg.com/nft20"></script>
+    <script src="https://unpkg.com/nft20@1.0.5/build/nft20.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
         integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
 
@@ -17,8 +17,9 @@
 
 <script>
 
-$(document).ready(function() {
-
+$(document).ready(async function() {
+    let nft = new NFT20("https://mainnet.infura.io/v3/a634422ef8f84eeab6c55d89d1a38e5d")
+    console.log(await nft.getPools())
 });
 </script>
 
