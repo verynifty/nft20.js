@@ -1,6 +1,6 @@
 {
   "name": "nft20",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "NFT20 SDK for easily trading NFT",
   "main": "nft20.js",
   "scripts": {
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/verynifty/nft20.js#readme",
   "dependencies": {
-    "axios": "^0.21.1"
+    "axios": "^0.21.1",
+    "ethers": "^5.4.1"
   }
 }

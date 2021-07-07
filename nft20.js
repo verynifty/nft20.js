@@ -1,13 +1,19 @@
 
 const axios = require('axios').default;
+const { ethers } = require("ethers");
 
-function NFT20() {
+function NFT20(ethereumProvider) {
     this.API_PATH = "https://api.nft20.io";
     this.NETWORKS = {
         ETHEREUM: 0,
         MATIC: 1,
         ALL: 420
     };
+    if (typeof jsonRPC === 'string' || jsonRPC instanceof String) {
+        this.provider = new ethers.providers.JsonRpcProvider(jsonRPC);
+    } else {
+        this.provider = jsonRPC
+    }
 }
 
 NFT20.prototype.getPools = async function (network = 420) {
