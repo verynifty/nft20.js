@@ -1,6 +1,7 @@
 
 const axios = require('axios').default;
 const Web3 = require('web3');
+const BigNumber = require("bignumber.js");
 
 const ABIS = {
     ERC20: require('./ABIS/ERC20.json'),
@@ -92,8 +93,35 @@ NFT20.prototype.getQuote = async function (nftContractAddress, amount = 1) {
         return null;
     }
     let lp_version = parseInt(pool.lp_version);
+    let result = {
+        buyPrice: 0,
+        sellPrice: 0
+    }
+    amount = amount += 2
     if (lp_version == 2) {
+        try {
+            // We calculate the price of one NFT with the slippage
+            let result = await this.uniRouter.methods
+              .getAmountsIn(amount + "", [
+                "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2", //WETH
+                pairDetail._nft20pair
+              ])
+              .call();
+            result.buyPrice = new BigNumber(result[0]).shiftedBy(-18).toNumber();
 
+          } catch (error) {
+          }
+          try {
+            // We calculate the price of one NFT with the slippage
+            let result = await this.uniRouter.methods
+              .getAmountsOut(amount + "", [
+                pairDetail._nft20pair,
+                "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2" //WETH
+              ])
+              .call();
+            result.sellPrice = new BigNumber(result[1]).shiftedBy(-18).toNumber();
+          } catch (error) {
+          }
     } else if (lp_version == 3) {
 
     }
