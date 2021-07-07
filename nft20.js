@@ -2,6 +2,16 @@
 const axios = require('axios').default;
 const { ethers } = require("ethers");
 
+const ABIS = {
+    ERC20: require('./ABIS/ERC20.json'),
+    NFT20CAS: require('./ABIS/NFT20CAS.json'),
+    ERC721: require('./ABIS/ERC721.json'),
+}
+
+const CONTRACT_INSTANCES = {
+    NFTCAS: "0xA42f6cADa809Bcf417DeefbdD69C5C5A909249C0"
+}
+
 function NFT20(ethereumProvider) {
     this.API_PATH = "https://api.nft20.io";
     this.NETWORKS = {
@@ -12,8 +22,10 @@ function NFT20(ethereumProvider) {
     if (typeof ethereumProvider === 'string' || ethereumProvider instanceof String) {
         this.provider = new ethers.providers.JsonRpcProvider(ethereumProvider);
     } else {
-        this.provider = ethereumProvider
+        this.provider = ethereumProvider;
     }
+    
+    this.NFT20CAS = new ethers.Contract(CONTRACT_INSTANCES.NFTCAS, ABIS.NFT20CAS, this.provider);
 }
 
 NFT20.prototype.getPools = async function (network = 420) {
