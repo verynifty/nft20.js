@@ -1498,7 +1498,7 @@ function NFT20(ethereumProvider) {
     this.NFT20CAS = new this.web3.eth.Contract(ABIS.NFT20CAS, CONTRACT_INSTANCES.NFT20CAS);
 }
 
-NFT20.prototype.getPools = async function (network = 420) {
+NFT20.prototype.getPools = async function (network = 0) {
     let url = this.API_PATH + "/pools"
     if (network != this.NETWORKS.ALL) {
         url += "?network=" + network;
@@ -1519,7 +1519,7 @@ NFT20.prototype.getPool = async function (nftContractAddress) {
 }
 
 NFT20.prototype.getPoolContent = async function (nftContractAddress) {
-    if (nftAddress == null) {
+    if (nftContractAddress == null) {
         return null;
     }
     let url = this.API_PATH + "/nfts?nft=" + nftContractAddress

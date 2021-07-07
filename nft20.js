@@ -1,5 +1,5 @@
 
-import {axios = require('axios').default;
+const axios = require('axios').default;
 const Web3 = require('web3');
 
 const ABIS = {
