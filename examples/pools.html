@@ -46,6 +46,7 @@
                     alert('Please connect Metamask')
                 }
                 let id = $(this).attr("nft_id")
+                console.log(selectedNFT, [id], [1], account)
                 let params = await nft20.buyNFT(selectedNFT, [id], [1], account)
                 params.value = (quote.buyPrice + quote.buyPrice * 5 / 100) * 1000 +"000000000000000"
                 const txHash = await ethereum.request({
