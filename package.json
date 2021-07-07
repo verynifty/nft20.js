@@ -1,6 +1,6 @@
 {
   "name": "nft20",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "NFT20 SDK for easily trading NFT",
   "main": "nft20.js",
   "scripts": {
