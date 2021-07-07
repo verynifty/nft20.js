@@ -7,6 +7,7 @@ const nft20 = new NFT20("https://mainnet.infura.io/v3/a634422ef8f84eeab6c55d89d1
 (async () => {
 
     let pools = await nft20.getPools();
+    await nft20.NFTapproveForAll("0xA42f6cADa809Bcf417DeefbdD69C5C5A909249C0", "0xA42f6cADa809Bcf417DeefbdD69C5C5A909249C0")
 
 })();
   

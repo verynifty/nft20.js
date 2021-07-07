@@ -1,6 +1,6 @@
 
 const axios = require('axios').default;
-const { ethers } = require("ethers");
+const Web3 = require('web3');
 
 const ABIS = {
     ERC20: require('./ABIS/ERC20.json'),
@@ -19,13 +19,8 @@ function NFT20(ethereumProvider) {
         MATIC: 1,
         ALL: 420
     };
-    if (typeof ethereumProvider === 'string' || ethereumProvider instanceof String) {
-        this.provider = new ethers.providers.JsonRpcProvider(ethereumProvider);
-    } else {
-        this.provider = ethereumProvider;
-    }
-    
-    this.NFT20CAS = new ethers.Contract(CONTRACT_INSTANCES.NFTCAS, ABIS.NFT20CAS, this.provider);
+    this.web3 = new Web3(new Web3.providers.HttpProvider(ethereumProvider));
+    this.NFT20CAS = new this.web3.eth.Contract(ABIS.NFT20CAS, CONTRACT_INSTANCES.NFTCAS);
 }
 
 NFT20.prototype.getPools = async function (network = 420) {
@@ -56,6 +51,21 @@ NFT20.prototype.getPoolContent = async function (nftContractAddress) {
     let nfts = await axios.get(url);
     nfts = pools.data.data;
     return (nfts);
+}
+
+NFT20.prototype.NFTisApprovedForAll = async function (nftContractAddress, ownerAddress, operatorAddress) {
+    let nftInstance = new this.web3.eth.Contract(ABIS.ERC721, nftContractAddress);
+    let result = await nftInstance.methods.isApprovedForAll(ownerAddress, operatorAddress).call();
+    return (result);
+}
+
+NFT20.prototype.NFTapproveForAll = function (nftContractAddress, operatorAddress) {
+    let nftInstance = new this.web3.eth.Contract(ABIS.ERC721, nftContractAddress);
+    let call = nftInstance.methods.setApprovalForAll(operatorAddress, true);
+    return ({
+        data: call.encodeABI(),
+        to: nftContractAddress
+    });
 }
 
 module.exports = NFT20

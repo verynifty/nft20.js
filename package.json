@@ -21,6 +21,6 @@
   "homepage": "https://github.com/verynifty/nft20.js#readme",
   "dependencies": {
     "axios": "^0.21.1",
-    "ethers": "^5.4.1"
+    "web3": "^1.4.0"
   }
 }
