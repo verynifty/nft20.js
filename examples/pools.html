@@ -46,7 +46,7 @@
                 console.log(params)
                 const txHash = await ethereum.request({
                     method: 'eth_sendTransaction',
-                    params: params
+                    params: [params]
                 });
             })
         });
