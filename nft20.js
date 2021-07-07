@@ -13,7 +13,8 @@ const ABIS = {
 const CONTRACT_INSTANCES = {
     NFT20CAS: "0xA42f6cADa809Bcf417DeefbdD69C5C5A909249C0",
     UNISWAPV2: "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
-    UNISWAPV3: "0xb27308f9F90D607463bb33eA1BeBb41C27CE5AB6"
+    UNISWAPV3: "0xb27308f9F90D607463bb33eA1BeBb41C27CE5AB6",
+    WETH: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
 }
 
 function NFT20(ethereumProvider) {
@@ -33,6 +34,10 @@ function NFT20(ethereumProvider) {
     this.UNISWAPV3 = new ethereum.w3.eth.Contract(
         ABIS.UNISWAPV3,
         CONTRACT_INSTANCES.UNISWAPV3
+    );
+    this.WETH = new this.ethereum.w3.eth.Contract(
+        ABIS.ERC20,
+        CONTRACT_INSTANCES.WETH
     );
 }
 
@@ -81,12 +86,17 @@ NFT20.prototype.NFTapproveForAll = function (nftContractAddress, operatorAddress
     });
 }
 
-NFT20.prototype.getQuote = async function(nftContractAddress, amount = 1) {
+NFT20.prototype.getQuote = async function (nftContractAddress, amount = 1) {
     let pool = await this.getPool(nftContractAddress);
     if (pool == null) {
         return null;
     }
-    
+    let lp_version = parseInt(pool.lp_version);
+    if (lp_version == 2) {
+
+    } else if (lp_version == 3) {
+
+    }
 }
 
 NFT20.prototype.sellNFT = async function (nftContractAddress, nftIds, nftAmounts, ownerAddress) {
