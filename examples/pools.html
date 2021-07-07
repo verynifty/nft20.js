@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <script src="https://unpkg.com/nft20@1.0.9/build/nft20.js"></script>
+    <script src="https://unpkg.com/nft20@1.0.11/build/nft20.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
         integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
 
@@ -25,14 +25,14 @@
         let nft20 = new NFT20("https://mainnet.infura.io/v3/a634422ef8f84eeab6c55d89d1a38e5d");
 
         $("#pool_list").change(async function (a) {
-            let selectedPool = this.value;
+            let selectedNFT = this.value;
             let nfts = await nft20.getPoolContent(selectedNFT);
             console.log(nfts)
             nfts.forEach(nft => {
-                $("#nft_list").append('<li><img width="40" height="40" src="' + nft.nft_image + '"/>#'  + nft.nft_id + '   <button>buy</button></li>')
+                $("#nft_list").append('<li><img width="40" height="40" src="' + nft.nft_image + '"/>#'  + nft.nft_id + '   <button class="buy" nft_id="' + nft.nft_id + '">buy</button></li>')
              });
              let quote = await nft20.getQuote(selectedNFT);
-             $("$nft_quote").text("Sell for " + quote.sellPrice + " ETH / buy for " + quote.buyPrice + " ETH")
+             $("#nft_quote").text("Sell for " + quote.sellPrice + " ETH / buy for " + quote.buyPrice + " ETH")
         });
 
         // We first load all pools
