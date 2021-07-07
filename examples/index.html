@@ -9,8 +9,8 @@
 </head>
 
 <body>
-
-    <h1>Listing pool</h1>
+    <h1>NFT20.js Examples</h1>
+    <h2>Listing pool</h2>
     <ul id="pool_list">
 
     </ul>
@@ -25,7 +25,6 @@ $(document).ready(async function() {
     pools.forEach(pool => {
         $("#pool_list").append('<li>' + pool.name + '</li>')
     });
-    console.log(await nft.getPools())
 });
 </script>
 

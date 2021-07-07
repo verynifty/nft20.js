@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://unpkg.com/nft20"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+        integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <h1>NFT20.js Examples</h1>
+    <h2>Listing pool</h2>
+    <ul id="pool_list">
+
+    </ul>
+
+</body>
+
+<script>
+
+$(document).ready(async function() {
+    let nft20 = new NFT20("https://mainnet.infura.io/v3/a634422ef8f84eeab6c55d89d1a38e5d");
+    let pools = await nft20.getPools();
+    pools.forEach(pool => {
+        $("#pool_list").append('<li>' + pool.name + '</li>')
+    });
+});
+</script>
+
+</html>
