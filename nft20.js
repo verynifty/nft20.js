@@ -98,34 +98,34 @@ NFT20.prototype.getQuote = async function (nftContractAddress, amount = 1) {
         buyPrice: 0,
         sellPrice: 0
     }
-    amount = new BigNumber(amount).multipliedBy(100).shiftedBy(18).toString();
+    amount = new BigNumber(amount).shiftedBy(20).toString();
     console.log(amount)
     if (lp_version == 2) {
         try {
             // We calculate the price of one NFT with the slippage
-            let result = await this.UNISWAPV2.methods
+            let res = await this.UNISWAPV2.methods
                 .getAmountsIn(amount + "", [
                     CONTRACT_INSTANCES.WETH,
                     pool.address
                 ])
                 .call();
-            result.buyPrice = new BigNumber(result[0]).shiftedBy(-18).toNumber();
+                console.log(result)
+            result.buyPrice = new BigNumber(res[0]).shiftedBy(-18).toNumber();
 
         } catch (error) {
             console.log(error)
         }
         try {
             // We calculate the price of one NFT with the slippage
-            let result = await this.UNISWAPV2.methods
+            let res = await this.UNISWAPV2.methods
                 .getAmountsOut(amount + "", [
                     pool.address,
                     CONTRACT_INSTANCES.WETH
                 ])
                 .call();
-            result.sellPrice = new BigNumber(result[1]).shiftedBy(-18).toNumber();
+            result.sellPrice = new BigNumber(res[1]).shiftedBy(-18).toNumber();
         } catch (error) {
             console.log(error)
-
         }
         return (result)
     } else if (lp_version == 3) {
@@ -139,6 +139,18 @@ NFT20.prototype.sellNFT = async function (nftContractAddress, nftIds, nftAmounts
         return null;
     }
     let call = this.NFT20CAS.methods.nftForEth(nftContractAddress, nftIds, nftAmounts, parseInt(pool.nft_type) == 721, pool.lp_fees ? pool.lp_fees : "0", parseInt(pool.lp_version) == 3);
+    return ({
+        data: call.encodeABI(),
+        to: CONTRACT_INSTANCES.NFT20CAS
+    });
+};
+
+NFT20.prototype.buyNFT = async function (nftContractAddress, nftIds, nftAmounts, ownerAddress) {
+    let pool = await this.getPool(nftContractAddress);
+    if (pool == null) {
+        return null;
+    }
+    let call = this.NFT20CAS.methods.nftForEth(nftContractAddress, nftIds, nftAmounts, ownerAddress, parseInt(pool.nft_type) == 721, pool.lp_fees ? pool.lp_fees : "0", parseInt(pool.lp_version) == 3);
     return ({
         data: call.encodeABI(),
         to: CONTRACT_INSTANCES.NFT20CAS

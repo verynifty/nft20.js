@@ -13,6 +13,7 @@
     <h2>Listing pool</h2>
     <select id="pool_list">
     </select>
+    <p id="nft_quote" />
     <ul id="nft_list">
         
     </ul>
@@ -25,10 +26,13 @@
 
         $("#pool_list").change(async function (a) {
             let selectedPool = this.value;
-            let nfts = await nft20.getPoolContent(selectedPool)
+            let nfts = await nft20.getPoolContent(selectedNFT);
+            console.log(nfts)
             nfts.forEach(nft => {
                 $("#nft_list").append('<li><img width="40" height="40" src="' + nft.nft_image + '"/>#'  + nft.nft_id + '   <button>buy</button></li>')
              });
+             let quote = await nft20.getQuote(selectedNFT);
+             $("$nft_quote").text("Sell for " + quote.sellPrice + " ETH / buy for " + quote.buyPrice + " ETH")
         });
 
         // We first load all pools
