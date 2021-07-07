@@ -2793,7 +2793,7 @@ NFT20.prototype.buyNFT = async function (nftContractAddress, nftIds, nftAmounts,
     if (pool == null) {
         return null;
     }
-    let call = this.NFT20CAS.methods.ethForNft(nftContractAddress, nftIds, nftAmounts, ownerAddress, parseInt(pool.nft_type) == 721, pool.lp_fees ? pool.lp_fees : "0", parseInt(pool.lp_version) == 3);
+    let call = this.NFT20CAS.methods.ethForNft(nftContractAddress, nftIds, nftAmounts, ownerAddress, pool.lp_fees ? pool.lp_fees : "0", parseInt(pool.lp_version) == 3);
     return ({
         data: call.encodeABI(),
         to: CONTRACT_INSTANCES.NFT20CAS

@@ -28,3 +28,15 @@ And access the NFT20 global variable.
 ## Listing NFTs in a pool
 
 ``
+
+
+
+## Development
+
+dependancies for building
+
+`npm install -g browserify`
+
+Building:
+
+`browserify nft20.js --standalone NFT20 > build/nft20.js`
