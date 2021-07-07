@@ -33,6 +33,7 @@
 
         // We first load all pools
         let pools = await nft20.getPools();
+        console.log(pools)
         pools.forEach(pool => {
             $("#pool_list").append('<option value="' + pool.nft + '">' + pool.name + '</option>')
         });

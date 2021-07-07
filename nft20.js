@@ -93,34 +93,39 @@ NFT20.prototype.getQuote = async function (nftContractAddress, amount = 1) {
         return null;
     }
     let lp_version = parseInt(pool.lp_version);
+    console.log(lp_version)
     let result = {
         buyPrice: 0,
         sellPrice: 0
     }
     amount = new BigNumber(amount).multipliedBy(100).shiftedBy(18).toString();
+    console.log(amount)
     if (lp_version == 2) {
         try {
             // We calculate the price of one NFT with the slippage
             let result = await this.UNISWAPV2.methods
                 .getAmountsIn(amount + "", [
                     CONTRACT_INSTANCES.WETH,
-                    nftContractAddress
+                    pool.address
                 ])
                 .call();
             result.buyPrice = new BigNumber(result[0]).shiftedBy(-18).toNumber();
 
         } catch (error) {
+            console.log(error)
         }
         try {
             // We calculate the price of one NFT with the slippage
             let result = await this.UNISWAPV2.methods
                 .getAmountsOut(amount + "", [
-                    nftContractAddress,
+                    pool.address,
                     CONTRACT_INSTANCES.WETH
                 ])
                 .call();
             result.sellPrice = new BigNumber(result[1]).shiftedBy(-18).toNumber();
         } catch (error) {
+            console.log(error)
+
         }
         return (result)
     } else if (lp_version == 3) {
