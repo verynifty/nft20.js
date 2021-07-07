@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <script src="https://unpkg.com/nft20"></script>
+    <script src="https://unpkg.com/nft20@1.0.9/build/nft20.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
         integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
 
@@ -12,8 +12,10 @@
     <h1>NFT20.js Examples</h1>
     <h2>Listing pool</h2>
     <select id="pool_list">
-
     </select>
+    <ul id="nft_list">
+        
+    </ul>
 </body>
 
 <script>
@@ -24,6 +26,9 @@
         $("#pool_list").change(async function (a) {
             let selectedPool = this.value;
             let nfts = await nft20.getPoolContent(selectedPool)
+            nfts.forEach(nft => {
+                $("#nft_list").append('<li><img width="40" height="40" src="' + nft.nft_image + '"/>#'  + nft.nft_id + '   <button>buy</button></li>')
+             });
             console.log(nfts)
         });
 

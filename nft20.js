@@ -49,7 +49,7 @@ NFT20.prototype.getPoolContent = async function (nftContractAddress) {
     }
     let url = this.API_PATH + "/nfts?nft=" + nftContractAddress
     let nfts = await axios.get(url);
-    nfts = pools.data.data;
+    nfts = nfts.data.data;
     return (nfts);
 }
 
