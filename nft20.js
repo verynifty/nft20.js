@@ -24,6 +24,7 @@ function NFT20(ethereumProvider) {
         ALL: 420
     };
     this.web3 = new Web3(new Web3.providers.HttpProvider(ethereumProvider));
+    // Instantiate contract we use often
     this.NFT20CAS = new this.web3.eth.Contract(ABIS.NFT20CAS, CONTRACT_INSTANCES.NFT20CAS);
     this.UNISWAPV2 = new ethereum.w3.eth.Contract(
         ABIS.UNISWAPV2,
@@ -33,7 +34,6 @@ function NFT20(ethereumProvider) {
         ABIS.UNISWAPV3,
         CONTRACT_INSTANCES.UNISWAPV3
     );
-    this.UNISWAPV3 = 
 }
 
 NFT20.prototype.getPools = async function (network = 0) {
@@ -79,6 +79,14 @@ NFT20.prototype.NFTapproveForAll = function (nftContractAddress, operatorAddress
         data: call.encodeABI(),
         to: nftContractAddress
     });
+}
+
+NFT20.prototype.getQuote = async function(nftContractAddress, amount = 1) {
+    let pool = await this.getPool(nftContractAddress);
+    if (pool == null) {
+        return null;
+    }
+    
 }
 
 NFT20.prototype.sellNFT = async function (nftContractAddress, nftIds, nftAmounts, ownerAddress) {
