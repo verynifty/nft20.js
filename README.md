@@ -8,11 +8,11 @@
 
 then in your javascript code:
 
-`const NFT20 = requir('nft20')`
+`const NFT20 = require('nft20')`
 
 Or in the browser :
 
-`<script src="https://unpkg.com/nft20@1.0.5/build/nft20.js"></script>`
+`<script src="https://unpkg.com/nft20"></script>`
 
 And access the NFT20 global variable.
 

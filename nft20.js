@@ -1,5 +1,5 @@
 
-const axios = require('axios').default;
+import {axios = require('axios').default;
 const Web3 = require('web3');
 
 const ABIS = {
@@ -23,7 +23,7 @@ function NFT20(ethereumProvider) {
     this.NFT20CAS = new this.web3.eth.Contract(ABIS.NFT20CAS, CONTRACT_INSTANCES.NFT20CAS);
 }
 
-NFT20.prototype.getPools = async function (network = 420) {
+NFT20.prototype.getPools = async function (network = 0) {
     let url = this.API_PATH + "/pools"
     if (network != this.NETWORKS.ALL) {
         url += "?network=" + network;
