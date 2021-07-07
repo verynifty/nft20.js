@@ -97,31 +97,32 @@ NFT20.prototype.getQuote = async function (nftContractAddress, amount = 1) {
         buyPrice: 0,
         sellPrice: 0
     }
-    amount = amount += 2
+    amount = new BigNumber(amount).multipliedBy(100).shiftedBy(18).toString();
     if (lp_version == 2) {
         try {
             // We calculate the price of one NFT with the slippage
-            let result = await this.uniRouter.methods
-              .getAmountsIn(amount + "", [
-                "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2", //WETH
-                pairDetail._nft20pair
-              ])
-              .call();
+            let result = await this.UNISWAPV2.methods
+                .getAmountsIn(amount + "", [
+                    CONTRACT_INSTANCES.WETH,
+                    nftContractAddress
+                ])
+                .call();
             result.buyPrice = new BigNumber(result[0]).shiftedBy(-18).toNumber();
 
-          } catch (error) {
-          }
-          try {
+        } catch (error) {
+        }
+        try {
             // We calculate the price of one NFT with the slippage
-            let result = await this.uniRouter.methods
-              .getAmountsOut(amount + "", [
-                pairDetail._nft20pair,
-                "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2" //WETH
-              ])
-              .call();
+            let result = await this.UNISWAPV2.methods
+                .getAmountsOut(amount + "", [
+                    nftContractAddress,
+                    CONTRACT_INSTANCES.WETH
+                ])
+                .call();
             result.sellPrice = new BigNumber(result[1]).shiftedBy(-18).toNumber();
-          } catch (error) {
-          }
+        } catch (error) {
+        }
+        return (result)
     } else if (lp_version == 3) {
 
     }
