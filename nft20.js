@@ -9,7 +9,7 @@ const ABIS = {
 }
 
 const CONTRACT_INSTANCES = {
-    NFTCAS: "0xA42f6cADa809Bcf417DeefbdD69C5C5A909249C0"
+    NFT20CAS: "0xA42f6cADa809Bcf417DeefbdD69C5C5A909249C0"
 }
 
 function NFT20(ethereumProvider) {
@@ -20,7 +20,7 @@ function NFT20(ethereumProvider) {
         ALL: 420
     };
     this.web3 = new Web3(new Web3.providers.HttpProvider(ethereumProvider));
-    this.NFT20CAS = new this.web3.eth.Contract(ABIS.NFT20CAS, CONTRACT_INSTANCES.NFTCAS);
+    this.NFT20CAS = new this.web3.eth.Contract(ABIS.NFT20CAS, CONTRACT_INSTANCES.NFT20CAS);
 }
 
 NFT20.prototype.getPools = async function (network = 420) {
@@ -34,7 +34,7 @@ NFT20.prototype.getPools = async function (network = 420) {
 }
 
 NFT20.prototype.getPool = async function (nftContractAddress) {
-    if (nftAddress == null) {
+    if (nftContractAddress == null) {
         return null;
     }
     let url = this.API_PATH + "/pools?nft=" + nftContractAddress
@@ -67,5 +67,17 @@ NFT20.prototype.NFTapproveForAll = function (nftContractAddress, operatorAddress
         to: nftContractAddress
     });
 }
+
+NFT20.prototype.sellNFT = async function (nftContractAddress, nftIds, nftAmounts, ownerAddress) {
+    let pool = await this.getPool(nftContractAddress);
+    if (pool == null) {
+        return null;
+    }
+    let call = this.NFT20CAS.methods.nftForEth(nftContractAddress, nftIds, nftAmounts, parseInt(pool.nft_type) == 721, pool.lp_fees ? pool.lp_fees : "0", parseInt(pool.lp_version) == 3);
+    return ({
+        data: call.encodeABI(),
+        to: CONTRACT_INSTANCES.NFT20CAS
+    });
+};
 
 module.exports = NFT20
