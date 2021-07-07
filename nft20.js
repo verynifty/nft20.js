@@ -28,15 +28,15 @@ function NFT20(ethereumProvider) {
     this.web3 = new Web3(new Web3.providers.HttpProvider(ethereumProvider));
     // Instantiate contract we use often
     this.NFT20CAS = new this.web3.eth.Contract(ABIS.NFT20CAS, CONTRACT_INSTANCES.NFT20CAS);
-    this.UNISWAPV2 = new ethereum.w3.eth.Contract(
+    this.UNISWAPV2 = new this.web3.eth.Contract(
         ABIS.UNISWAPV2,
         CONTRACT_INSTANCES.UNISWAPV2
     );
-    this.UNISWAPV3 = new ethereum.w3.eth.Contract(
+    this.UNISWAPV3 = new this.web3.eth.Contract(
         ABIS.UNISWAPV3,
         CONTRACT_INSTANCES.UNISWAPV3
     );
-    this.WETH = new this.ethereum.w3.eth.Contract(
+    this.WETH = new this.web3.eth.Contract(
         ABIS.ERC20,
         CONTRACT_INSTANCES.WETH
     );
