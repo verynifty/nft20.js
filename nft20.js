@@ -9,10 +9,10 @@ function NFT20(ethereumProvider) {
         MATIC: 1,
         ALL: 420
     };
-    if (typeof jsonRPC === 'string' || jsonRPC instanceof String) {
-        this.provider = new ethers.providers.JsonRpcProvider(jsonRPC);
+    if (typeof ethereumProvider === 'string' || ethereumProvider instanceof String) {
+        this.provider = new ethers.providers.JsonRpcProvider(ethereumProvider);
     } else {
-        this.provider = jsonRPC
+        this.provider = ethereumProvider
     }
 }
 
