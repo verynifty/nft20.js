@@ -1,8 +1,8 @@
 {
   "name": "nft20",
-  "version": "1.0.15",
+  "version": "1.0.23",
   "description": "NFT20 SDK for easily trading NFT",
-  "main": "build/nft20.js",
+  "main": "nft20.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,7 +11,10 @@
     "url": "git+https://github.com/verynifty/nft20.js.git"
   },
   "keywords": [
-    "NFT"
+    "NFT",
+    "NFT20",
+    "Ethereum",
+    "javascript"
   ],
   "author": "https://nft20.io/",
   "license": "MIT",
