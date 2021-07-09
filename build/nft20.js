@@ -2739,7 +2739,9 @@ NFT20.prototype.getQuote = async function (nftContractAddress, amount = 1) {
     console.log(lp_version)
     let result = {
         buyPrice: 0,
-        sellPrice: 0
+        sellPrice: 0,
+        buyPriceFloat: 0,
+        sellPriceFloat: 0
     }
     amount = new BigNumber(amount).shiftedBy(20).toString();
     console.log(amount)
@@ -2752,9 +2754,8 @@ NFT20.prototype.getQuote = async function (nftContractAddress, amount = 1) {
                     pool.address
                 ])
                 .call();
-                console.log(result)
-            result.buyPrice = new BigNumber(res[0]).shiftedBy(-18).toNumber();
-
+            result.buyPrice = new BigNumber(res[0]).toString();
+            result.buyPriceFloat = new BigNumber(res[0]).shiftedBy(-18).toNumber();
         } catch (error) {
             console.log(error)
         }
@@ -2766,7 +2767,8 @@ NFT20.prototype.getQuote = async function (nftContractAddress, amount = 1) {
                     CONTRACT_INSTANCES.WETH
                 ])
                 .call();
-            result.sellPrice = new BigNumber(res[1]).shiftedBy(-18).toNumber();
+            result.sellPrice = new BigNumber(res[1]).toString();
+            result.sellPriceFloat = new BigNumber(res[1]).shiftedBy(-18).toNumber();
         } catch (error) {
             console.log(error)
         }

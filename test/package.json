@@ -9,6 +9,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "nft20": "^1.0.1"
+    "nft20": "^1.0.1",
+    "web3": "^1.4.0"
   }
 }
