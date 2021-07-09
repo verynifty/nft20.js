@@ -44,8 +44,6 @@
                 }
                 let id = $(this).attr("nft_id")
                 let params = await nft20.buyNFT(selectedNFT, [id], [1], account)
-                params.value = new BigNumber(quote.buyPrice).toString(16);
-                params.from = account;
                 console.log(params)
                 const txHash = await ethereum.request({
                     method: 'eth_sendTransaction',

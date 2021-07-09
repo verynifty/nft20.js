@@ -2749,7 +2749,7 @@ NFT20.prototype.getQuote = async function (nftContractAddress, amount = 1) {
         try {
             // We calculate the price of one NFT with the slippage
             let res = await this.UNISWAPV2.methods
-                .getAmountsIn(amount + "", [
+                .getAmountsIn(amount, [
                     CONTRACT_INSTANCES.WETH,
                     pool.address
                 ])
@@ -2762,7 +2762,7 @@ NFT20.prototype.getQuote = async function (nftContractAddress, amount = 1) {
         try {
             // We calculate the price of one NFT with the slippage
             let res = await this.UNISWAPV2.methods
-                .getAmountsOut(amount + "", [
+                .getAmountsOut(amount, [
                     pool.address,
                     CONTRACT_INSTANCES.WETH
                 ])
@@ -2795,11 +2795,16 @@ NFT20.prototype.buyNFT = async function (nftContractAddress, nftIds, nftAmounts,
     if (pool == null) {
         return null;
     }
-    console.log(nftContractAddress, nftIds, nftAmounts, ownerAddress, pool.lp_fees ? pool.lp_fees : "0", parseInt(pool.lp_version) == 3)
+    let quote = await this.getQuote(nftContractAddress);
+    if (quote.buyPrice == 0) {
+        return null;
+    }
+    let value = (new BigNumber(quote.buyPrice).plus(new BigNumber(quote.buyPrice).mul(10).div(100))).toString(16)
     let call = this.NFT20CAS.methods.ethForNft(nftContractAddress, nftIds, nftAmounts, ownerAddress, pool.lp_fees ? pool.lp_fees : "0", parseInt(pool.lp_version) == 3);
     return ({
         data: call.encodeABI(),
-        to: CONTRACT_INSTANCES.NFT20CAS
+        to: CONTRACT_INSTANCES.NFT20CAS,
+        value: value
     });
 };
 
