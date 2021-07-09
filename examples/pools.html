@@ -31,9 +31,9 @@
             let selectedNFT = this.value;
             let nfts = await nft20.getPoolContent(selectedNFT);
             nfts.forEach(nft => {
-                $("#nft_list").append('<li><img width="40" height="40" src="' + nft.nft_image + '"/>#' + nft.nft_id + '   <button class="buy" nft_id="' + nft.nft_id + '">buy</button></li>')
+                $("#nft_list").append('<li><img width="50" height="50" src="' + nft.nft_image + '"/>#' + nft.nft_id + '   <button class="buy" nft_id="' + nft.nft_id + '">buy</button></li>')
             });
-            quote = await nft20.getQuote(selectedNFT);
+            quote = await nft20.getQuote(selectedNFT, 2);
             $("#nft_quote").text("Sell for " + quote.sellPrice + " ETH / buy for " + quote.buyPrice + " ETH")
             $(".buy").click(async function () {
                 if (account == null) {

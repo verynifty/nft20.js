@@ -106,7 +106,7 @@ NFT20.prototype.getQuote = async function (nftContractAddress, amount = 1) {
         try {
             // We calculate the price of one NFT with the slippage
             let res = await this.UNISWAPV2.methods
-                .getAmountsIn(amount + "", [
+                .getAmountsIn(amount, [
                     CONTRACT_INSTANCES.WETH,
                     pool.address
                 ])
@@ -119,7 +119,7 @@ NFT20.prototype.getQuote = async function (nftContractAddress, amount = 1) {
         try {
             // We calculate the price of one NFT with the slippage
             let res = await this.UNISWAPV2.methods
-                .getAmountsOut(amount + "", [
+                .getAmountsOut(amount, [
                     pool.address,
                     CONTRACT_INSTANCES.WETH
                 ])
