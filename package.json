@@ -1,6 +1,6 @@
 {
   "name": "nft20",
-  "version": "1.0.26",
+  "version": "1.0.28",
   "description": "NFT20 SDK for easily trading NFT",
   "main": "nft20.js",
   "scripts": {
@@ -26,5 +26,12 @@
     "axios": "^0.21.1",
     "bignumber.js": "^9.0.1",
     "web3": "^1.4.0"
-  }
+  },
+  "files": [
+    "README.md",
+    "nft20.js",
+    "build/nft20.js",
+    "ABIS/*.json",
+    "LICENSE"
+  ]
 }
