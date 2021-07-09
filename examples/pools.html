@@ -3,6 +3,9 @@
 
 <head>
     <script src="https://unpkg.com/nft20/build/nft20.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bignumber.js/8.0.2/bignumber.min.js"
+        integrity="sha512-7UzDjRNKHpQnkh1Wf1l6i/OPINS9P2DDzTwQNX79JxfbInCXGpgI1RPb3ZD+uTP3O5X7Ke4e0+cxt2TxV7n0qQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
         integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
 </head>
@@ -41,7 +44,7 @@
                 }
                 let id = $(this).attr("nft_id")
                 let params = await nft20.buyNFT(selectedNFT, [id], [1], account)
-                params.value = quote.buyPrice;
+                params.value = new BigNumber(quote.buyPrice).toString(16);
                 params.from = account;
                 console.log(params)
                 const txHash = await ethereum.request({
