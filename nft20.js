@@ -25,6 +25,7 @@ function NFT20(ethereumProvider) {
         MATIC: 1,
         ALL: 420
     };
+    this.buySlippage = 10;
     this.web3 = new Web3(new Web3.providers.HttpProvider(ethereumProvider));
     // Instantiate contract we use often
     this.NFT20CAS = new this.web3.eth.Contract(ABIS.NFT20CAS, CONTRACT_INSTANCES.NFT20CAS);
@@ -156,7 +157,7 @@ NFT20.prototype.buyNFT = async function (nftContractAddress, nftIds, nftAmounts,
     if (quote.buyPrice == 0) {
         return null;
     }
-    let value = (new BigNumber(quote.buyPrice).plus(new BigNumber(quote.buyPrice).mul(10).div(100))).toString(16)
+    let value = ((new BigNumber(quote.buyPrice)).plus((new BigNumber(quote.buyPrice)).multipliedBy(this.buySlippage).dividedBy(100))).toString(16)
     let call = this.NFT20CAS.methods.ethForNft(nftContractAddress, nftIds, nftAmounts, ownerAddress, pool.lp_fees ? pool.lp_fees : "0", parseInt(pool.lp_version) == 3);
     return ({
         data: call.encodeABI(),
