@@ -1,5 +1,10 @@
 # nft20.js
 
+## Example
+
+* [A simple HTML store to buy/sell your NFT using nft20.js](https://verynifty.github.io/nft20.js/examples/)
+* [A collection of scripts](https://github.com/verynifty/nft20.js/tree/main/test)
+
 ## Getting started
 
 ### Import in your project
@@ -12,22 +17,38 @@ then in your javascript code:
 
 Or in the browser :
 
-`<script src="https://unpkg.com/nft20"></script>`
+`<script src="https://unpkg.com/nft20/build/nft20.js"></script>`
 
 And access the NFT20 global variable.
 
 ## Initialize
+
+Initialize NFT20 by passing an HTTP or WS RPC endpoint.
 
 `let nft20 = new NFT20("https://mainnet.infura.io/v3/a634422ef8f84eeab6c55d89d1a38e5d")`
 
 
 ## Listing Pools
 
+Get a list of all pools 
+
 `let pools = await nft20.getPools()`
 
 ## Listing NFTs in a pool
 
-``
+You can get the content of a pool by querying `getPoolContent` with the NFT address.
+
+`let nfts = await nft20.getPoolContent("0xc3f733ca98e0dad0386979eb96fb1722a1a05e69")`
+
+## Getting price
+
+Will give you how much ETH is needed to buy or sell the NFT based on Uniswap liquidity and price.
+
+`let quote = await nft20.getQuote("0xc3f733ca98e0dad0386979eb96fb1722a1a05e69")`
+
+
+## Buying an NFT from a pool
+
 
 
 

@@ -37,7 +37,7 @@
                 $("#nft_list").append('<li><img width="50" height="50" src="' + nft.nft_image + '"/>#' + nft.nft_id + '   <button class="buy" nft_id="' + nft.nft_id + '">buy</button></li>')
             });
             quote = await nft20.getQuote(selectedNFT, 1);
-            $("#nft_quote").text("Sell for " + quote.sellPrice + " ETH / buy for " + quote.buyPrice + " ETH")
+            $("#nft_quote").text("Sell for " + quote.sellPriceFloat + " ETH / buy for " + quote.buyPriceFloat + " ETH")
             $(".buy").click(async function () {
                 if (account == null) {
                     alert('Please connect Metamask')
@@ -45,7 +45,6 @@
                 let id = $(this).attr("nft_id")
                 let params = await nft20.buyNFT(selectedNFT, [id], [1], account)
                 params.from = account;
-                console.log(params)
                 const txHash = await ethereum.request({
                     method: 'eth_sendTransaction',
                     params: [params]
