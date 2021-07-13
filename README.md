@@ -64,7 +64,7 @@ let params = await nft20.buyNFT(selectedNFT, [id], [1], account)
 
 ## Guides
 
-* [A guide on how to buy NFTs with Javascript](https://ethereumdev.io/nft20-how-to-simply-trade-nfts-in-js/)
+* [A guide on how to buy and sell NFTs on NFT20 with Javascript](https://ethereumdev.io/nft20-how-to-simply-trade-nfts-in-js/)
 
 ## Development
 
