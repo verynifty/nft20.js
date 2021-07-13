@@ -49,6 +49,16 @@ Will give you how much ETH is needed to buy or sell the NFT based on Uniswap liq
 
 ## Buying an NFT from a pool
 
+`
+let nftAddress = "0xc3f733ca98e0dad0386979eb96fb1722a1a05e69"
+let nftId = 1
+let params = await nft20.buyNFT(selectedNFT, [id], [1], account)
+                params.from = account;
+                const txHash = await ethereum.request({
+                    method: 'eth_sendTransaction',
+                    params: [params]
+                });
+`
 
 
 
