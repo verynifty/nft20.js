@@ -5,6 +5,8 @@
 * [A simple HTML store to buy/sell your NFT using nft20.js](https://verynifty.github.io/nft20.js/examples/)
 * [A collection of scripts](https://github.com/verynifty/nft20.js/tree/main/test)
 
+
+
 ## Getting started
 
 ### Import in your project
@@ -60,7 +62,9 @@ let params = await nft20.buyNFT(selectedNFT, [id], [1], account)
                 });
 `
 
+## Guides
 
+* [A guide on how to buy NFTs with Javascript](https://ethereumdev.io/nft20-how-to-simply-trade-nfts-in-js/)
 
 ## Development
 
