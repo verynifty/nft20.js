@@ -1,6 +1,6 @@
 # nft20.js
 
-## Example
+## Examples
 
 * [A simple HTML store to buy/sell your NFT using nft20.js](https://verynifty.github.io/nft20.js/examples/)
 * [A collection of scripts](https://github.com/verynifty/nft20.js/tree/main/test)
