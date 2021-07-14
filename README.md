@@ -36,6 +36,10 @@ Get a list of all pools
 
 `let pools = await nft20.getPools()`
 
+Get a specific pool by passing the NFT contract address:
+
+`let pool = await nft20.getPool("0xc3f733ca98e0dad0386979eb96fb1722a1a05e69");`
+
 ## Listing NFTs in a pool
 
 You can get the content of a pool by querying `getPoolContent` with the NFT address.
